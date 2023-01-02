@@ -31,9 +31,10 @@ const char* g_vertexShaderSource = "#version 330 core\n"
 const char* g_fragmentShaderSource = "#version 330 core\n"
 	"out vec4 FragColor;\n"
 	"\n"
+	"uniform vec4 ourColor;\n"
 	"void main()\n"
 	"{\n"
-	"	FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);\n"
+	"	FragColor = ourColor;\n"
 	"}\n";
 
 const unsigned int g_strLen = 512;
@@ -93,7 +94,7 @@ int main(int argc, char** argv) {
 	glGenVertexArrays(1, &vao2);
 	glGenBuffers(1, &vbo2);
 	glGenBuffers(1, &ebo2);
-	// 1. vao
+	// 1. bind vao
 	glBindVertexArray(vao2);
 	// 2. copy data to vbo
 	glBindBuffer(GL_ARRAY_BUFFER, vbo2);
@@ -160,14 +161,19 @@ int main(int argc, char** argv) {
 		auto end = std::chrono::system_clock::now();
 		std::chrono::duration<float> diff = end - start;
 		window.ProcessInput();
-		glClearColor(.5f + 0.5f * cos(diff.count()), 0.5f + 0.5f * sin(diff.count()), 0.3f + 0.1f * sin(diff.count() + 0.16f), 0.9f);
+		glClearColor(0.314f, 0.15f, 0.92f, 0.65f);
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		glUseProgram(shaderProgram);
+		int vertexColorLocation = glGetUniformLocation(shaderProgram, "ourColor");
+		glUniform4f(vertexColorLocation, 0.271f, 0.428f + 0.3f * sin(diff.count()), 0.82f + 0.045f * cos(diff.count()), 0.90f);
 		// draw triangle
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 		glBindVertexArray(vao1);
 		glDrawArrays(GL_TRIANGLES, 0, triangle.size());
 		// draw pentagon
+		glUseProgram(shaderProgram);
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 		glUseProgram(shaderProgram);
 		glBindVertexArray(vao2);
 		glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, nullptr);
