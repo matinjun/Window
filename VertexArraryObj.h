@@ -2,12 +2,13 @@
 #define VERTEX_ARRAY_OBJ_H
 
 #include "OpenGLEnv.h"
-#include "VertexBufferObj.h"
+#include "BufferObj.h"
 
 namespace GFX {
 
 class VertexArraryObj
 {
+public:
 	enum class Type
 	{
 		VBO,

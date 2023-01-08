@@ -30,7 +30,7 @@
     <ClCompile Include="Shader.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="VertexBufferObj.cpp">
+    <ClCompile Include="BufferObj.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="VertexArraryObj.cpp">
@@ -50,7 +50,7 @@
     <ClInclude Include="Shader.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="VertexBufferObj.h">
+    <ClInclude Include="BufferObj.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="VertexArraryObj.h">
@@ -60,5 +60,8 @@
   <ItemGroup>
     <None Include="glsl\fragment.glsl" />
     <None Include="glsl\vertex.glsl" />
+    <None Include="README.md">
+      <Filter>源文件</Filter>
+    </None>
   </ItemGroup>
 </Project>

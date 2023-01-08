@@ -6,6 +6,7 @@
 #include "OpenGLEnv.h"
 #include "Window.h"
 #include "Shader.h"
+#include "VertexArraryObj.h"
 
 // TODO: add class VertexArrayObj
 // TODO: add class VertexBufferObj
@@ -46,6 +47,8 @@ int main(int argc, char** argv) {
 		 -0.49f, -0.21f, 0.0f, 0.0f, 1.0f, 0.0f,
 		 -0.23f,  -0.2f, 0.0f, 0.0f, 0.0f, 1.0f,
 	};
+#define VAO_CLASS 0
+#if VAO_CLASS
 	unsigned int vbo1, vao1;
 	// ![img](https://learnopengl.com/img/getting-started/vertex_array_objects.png)
 	// prepare a vertex array object
@@ -66,6 +69,15 @@ int main(int argc, char** argv) {
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), reinterpret_cast<void*>(3 * sizeof(float)));
 	// 4. ubind vao1
 	glBindVertexArray(0);
+#else
+	VertexArraryObj vao;
+	vao.Use();
+	vao.BufferData(VertexArraryObj::Type::VBO, triangle.size() * sizeof(triangle[0]), triangle.data(), GL_STATIC_DRAW);
+	vao.VertexAttribPointer(0, 3,
+		GL_FLOAT, GL_FALSE, 6 * sizeof(float), reinterpret_cast<void*>(0));
+	vao.VertexAttribPointer(1, 3,
+		GL_FLOAT, GL_FALSE, 6 * sizeof(float), reinterpret_cast<void*>(3 * sizeof(float)));
+#endif
 
 	std::string vertexShaderPath = "D:\\code\\C++\\Graphics\\Window\\glsl\\vertex.glsl";
 	std::string fragmentShaderPath = "D:\\code\\C++\\Graphics\\Window\\glsl\\fragment.glsl";
@@ -83,7 +95,11 @@ int main(int argc, char** argv) {
 		shader.use();
 		// draw triangle
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+#if VAO_CLASS
 		glBindVertexArray(vao1);
+#else
+		vao.Use();
+#endif
 		glDrawArrays(GL_TRIANGLES, 0, triangle.size());
 
 		glfwSwapBuffers(window.GetWindow());

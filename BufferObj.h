@@ -1,5 +1,5 @@
-#ifndef VERTEX_BUFFER_OBJ_H
-#define VERTEX_BUFFER_OBJ_H
+#ifndef BUFFER_OBJ_H
+#define BUFFER_OBJ_H
 
 #include "OpenGLEnv.h"
 
@@ -28,7 +28,7 @@ private:
 
 } // GFX
 
-#endif // !VERTEX_BUFFER_OBJ_H
+#endif // !BUFFER_OBJ_H
 
 
 

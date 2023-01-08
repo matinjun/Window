@@ -148,7 +148,7 @@
     <ClCompile Include="OpenGLEnv.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="VertexArraryObj.cpp" />
-    <ClCompile Include="VertexBufferObj.cpp" />
+    <ClCompile Include="BufferObj.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -156,12 +156,13 @@
     <ClInclude Include="OpenGLEnv.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="VertexArraryObj.h" />
-    <ClInclude Include="VertexBufferObj.h" />
+    <ClInclude Include="BufferObj.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="glsl\fragment.glsl" />
     <None Include="glsl\vertex.glsl" />
+    <None Include="README.md" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,4 +1,4 @@
-#include "VertexBufferObj.h"
+#include "BufferObj.h"
 
 void GFX::BufferObj::BufferData(GLsizeiptr size, const void* data, GLenum usage) const
 {
