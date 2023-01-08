@@ -147,12 +147,16 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="OpenGLEnv.cpp" />
     <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="VertexArraryObj.cpp" />
+    <ClCompile Include="VertexBufferObj.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="gfx_log.h" />
     <ClInclude Include="OpenGLEnv.h" />
     <ClInclude Include="Shader.h" />
+    <ClInclude Include="VertexArraryObj.h" />
+    <ClInclude Include="VertexBufferObj.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>

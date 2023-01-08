@@ -7,6 +7,9 @@
 #include "Window.h"
 #include "Shader.h"
 
+// TODO: add class VertexArrayObj
+// TODO: add class VertexBufferObj
+
 namespace GFX {
 
 // 回调事件集合
