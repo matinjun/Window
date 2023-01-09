@@ -34,7 +34,7 @@ const unsigned int g_strLen = 512;
 
 int main(int argc, char** argv) {
 	using namespace GFX;
-	OpenGLEnv& env = OpenGLEnv::Create();
+	OpenGLEnv& env = OpenGLEnv::GetInstance();
 	env.Init();
 
 	Window window;
@@ -42,42 +42,25 @@ int main(int argc, char** argv) {
 	window.InitGlad();
 	window.SetFramebufferSizeCallback(CALLBACK::framebuffer_size_callback);
 
-	std::vector<float> triangle = {
+	std::vector<float> quardrangle = {
 		-0.37f, 0.07f, 0.0f, 1.0f, 0.0f, 0.0f,
 		 -0.49f, -0.21f, 0.0f, 0.0f, 1.0f, 0.0f,
 		 -0.23f,  -0.2f, 0.0f, 0.0f, 0.0f, 1.0f,
+		 0.11f, 0.37f, 0.0f, 0.5f, 0.8f, 0.6f,
 	};
-#define VAO_CLASS 0
-#if VAO_CLASS
-	unsigned int vbo1, vao1;
-	// ![img](https://learnopengl.com/img/getting-started/vertex_array_objects.png)
-	// prepare a vertex array object
-	glGenVertexArrays(1, &vao1);
-	// prepare a vertex buffer object
-	glGenBuffers(1, &vbo1);
-	// 1. bind Vertex Array Object
-	glBindVertexArray(vao1);
-	// 2. copy our vertices array in a buffer for OpenGL to use
-	glBindBuffer(GL_ARRAY_BUFFER, vbo1);
-	glBufferData(GL_ARRAY_BUFFER,
-		triangle.size() * sizeof(triangle[0]), triangle.data(), GL_STATIC_DRAW);
-	// 3. then set our vertex attributes pointers
-	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(0, 3, // The first argument is the index of vertex attribute in vertex shader
-		GL_FLOAT, GL_FALSE, 6 * sizeof(float), static_cast<void*>(0));
-	glEnableVertexAttribArray(1);
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), reinterpret_cast<void*>(3 * sizeof(float)));
-	// 4. ubind vao1
-	glBindVertexArray(0);
-#else
+	std::vector<unsigned int> indices = {
+		0, 1, 2,
+		0, 2, 3,
+	};
+	
 	VertexArraryObj vao;
 	vao.Use();
-	vao.BufferData(VertexArraryObj::Type::VBO, triangle.size() * sizeof(triangle[0]), triangle.data(), GL_STATIC_DRAW);
+	vao.BufferData(VertexArraryObj::Type::VBO, quardrangle.size() * sizeof(quardrangle[0]), quardrangle.data(), GL_STATIC_DRAW);
+	vao.BufferData(VertexArraryObj::Type::EBO, indices.size() * sizeof(indices[0]), indices.data(), GL_STATIC_DRAW);
 	vao.VertexAttribPointer(0, 3,
 		GL_FLOAT, GL_FALSE, 6 * sizeof(float), reinterpret_cast<void*>(0));
 	vao.VertexAttribPointer(1, 3,
 		GL_FLOAT, GL_FALSE, 6 * sizeof(float), reinterpret_cast<void*>(3 * sizeof(float)));
-#endif
 
 	std::string vertexShaderPath = "D:\\code\\C++\\Graphics\\Window\\glsl\\vertex.glsl";
 	std::string fragmentShaderPath = "D:\\code\\C++\\Graphics\\Window\\glsl\\fragment.glsl";
@@ -93,14 +76,12 @@ int main(int argc, char** argv) {
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		shader.use();
-		// draw triangle
-		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-#if VAO_CLASS
-		glBindVertexArray(vao1);
-#else
+		// draw quardrangle
 		vao.Use();
-#endif
-		glDrawArrays(GL_TRIANGLES, 0, triangle.size());
+		// for vertex array
+		// glDrawArrays(GL_TRIANGLES, 0, quardrangle.size());
+		// for vertex index array
+		glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, nullptr);
 
 		glfwSwapBuffers(window.GetWindow());
 		glfwPollEvents();

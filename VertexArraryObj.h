@@ -22,13 +22,14 @@ public:
 	void Use() const { glBindVertexArray(vao_); }
 	void BufferData(Type type,
 		GLsizeiptr size, const void* data, GLenum usage) const;
-	void VertexAttribPointer(GLuint index,
+	void VertexAttribPointer(GLuint index,// The first argument is the index of vertex attribute in vertex shader
 		GLint size, GLenum type, GLboolean normalized,
 		GLsizei stride, const void* pointer) const;
 	unsigned int GetVAO() const { return vao_; }
 	unsigned int GetVBO() const { return vbo_.GetBufferObj(); }
 	unsigned int GetEBO() const { return ebo_.GetBufferObj(); }
 private:
+	// ![img](https://learnopengl.com/img/getting-started/vertex_array_objects.png)
 	unsigned int vao_ = 0;
 	BufferObj vbo_;
 	BufferObj ebo_;

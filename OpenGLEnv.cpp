@@ -3,7 +3,7 @@
 
 namespace GFX {
 
-OpenGLEnv& OpenGLEnv::Create()
+OpenGLEnv& OpenGLEnv::GetInstance()
 {
 	static OpenGLEnv env;
 	return env;

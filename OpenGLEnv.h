@@ -11,7 +11,7 @@ public:
 	OpenGLEnv(const OpenGLEnv&) = delete;
 	OpenGLEnv& operator=(const OpenGLEnv&) = delete;
 	~OpenGLEnv() = default;
-	static OpenGLEnv& Create();
+	static OpenGLEnv& GetInstance();
 	void Init()
 	{
 		InitGlfw();
